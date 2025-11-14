@@ -17,7 +17,7 @@ function OrderForm() {
 
     
     const formSend = async (data) => {
-        const repsonse = await fetch('http://localhost:8080/order', {
+        const repsonse = await fetch('https://shoe-customizer-production.up.railway.app/order', {
             method:'POST',
             headers: {
                 'Content-Type':'application/json'

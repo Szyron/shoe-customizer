@@ -23,14 +23,14 @@ export const OrderProvider = ({ children }) => {
 
 
     useEffect(() => {
-        fetch('http://localhost:8080/shoe_size')
+        fetch('https://shoe-customizer-production.up.railway.app/shoe_size')
             .then(res => res.json())
             .then(data => setDataSize(data))
             .catch(err => alert("Error: " + err.message));
     }, []);
     
     useEffect(() => {
-        fetch('http://localhost:8080/shoe')
+        fetch('https://shoe-customizer-production.up.railway.app/shoe')
             .then(res => res.json())
             .then(data => setData(data))
             .catch(err => alert("Error: " + err.message));
