@@ -147,7 +147,7 @@ app.post("/order", async (req, res) => {
     name: "Shoe Customizer"
   },
   to: [
-    { email: "berron@alfamarketinggroup.hu" }
+    { email: "szirony.dev@gmail.com" }
   ],
   subject: "Új cipő rendelés",
   htmlContent: `
