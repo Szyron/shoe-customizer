@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import nodemailer from "nodemailer";
+import SibApiV3Sdk from "sib-api-v3-sdk";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -15,15 +15,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
-  secure: false,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS
-  }
-});
+const brevoClient = SibApiV3Sdk.ApiClient.instance;
+brevoClient.authentications["api-key"].apiKey = process.env.BREVO_API_KEY;
+
+const brevoEmail = new SibApiV3Sdk.TransactionalEmailsApi();
 
 
 // Test endpoint
@@ -146,23 +141,28 @@ app.post("/order", async (req, res) => {
       .map(([part, color]) => `<li><b>${part}</b>: ${color}</li>`)
       .join("");
 
-    await transporter.sendMail({
-      from: `"Shoe Customizer" <${process.env.SMTP_USER}>`,
-      to: "szirony.dev@gmail.com",
-      subject: "Új cipő rendelés",
-      html: `
-        <h2>Új rendelés érkezett</h2>
-        <p><b>Név:</b> ${lastName} ${surname}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Telefonszám:</b> ${tel}</p>
-        <p><b>Méret:</b> ${size}</p>
+    await brevoEmail.sendTransacEmail({
+  sender: {
+    email: "szironybalazs@gmail.com",
+    name: "Shoe Customizer"
+  },
+  to: [
+    { email: "szirony.dev@gmail.com" }
+  ],
+  subject: "Új cipő rendelés",
+  htmlContent: `
+    <h2>Új rendelés érkezett</h2>
+    <p><b>Név:</b> ${lastName} ${surname}</p>
+    <p><b>Email:</b> ${email}</p>
+    <p><b>Telefonszám:</b> ${tel}</p>
+    <p><b>Méret:</b> ${size}</p>
 
-        <h3>Kiválasztott színek:</h3>
-        <ul>${colorListHTML}</ul>
+    <h3>Kiválasztott színek:</h3>
+    <ul>${colorListHTML}</ul>
 
-        <p>Ideje feldolgozni! 🚀</p>
-      `
-    });
+    <p>Ideje feldolgozni! 🚀</p>
+  `
+});
 
     res.json({ message: "Order sent successfully" });
   } catch (err) {
@@ -174,12 +174,12 @@ app.post("/order", async (req, res) => {
 
 app.get("/test-mail", async (req, res) => {
   try {
-    await transporter.sendMail({
-      from: `"Shoe Customizer" <${process.env.SMTP_USER}>`,
-      to: "szironybalazs@gmail.com",
-      subject: "Teszt email",
-      text: "Ha ezt látod, működik a Gmail SMTP 🎉"
-    });
+    await brevoEmail.sendTransacEmail({
+  sender: { email: "szironybalazs@gmail.com", name: "Shoe Customizer" },
+  to: [{ email: "szironybalazs@gmail.com" }],
+  subject: "Teszt email",
+  htmlContent: "<h1>Működik a Brevo API 🎉</h1>"
+});
 
     res.send("Email elküldve!");
   } catch (err) {
