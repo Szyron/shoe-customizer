@@ -1,29 +1,25 @@
 import './App.css'
-import ShoeCard from './components/ShoeCard'
-import StepsCard from './components/StepsCard'
-import { BrowserRouter,Routes, Route , Navigate} from 'react-router-dom';
+import ShoeCard from './components/ShoeCard';
 import OrderForm from './components/OrderForm';
-import { useEffect, useState } from "react";
+import { ToastContainer } from 'react-toastify';
+import { OrderProvider } from './components/OrderContext';
 
 function App() {
-
-  
-  
-
-
-
-
-
   return (
-    <BrowserRouter>
-      <div className="min-h-screen flex flex-col items-center justify-center gap-8 p-8">
-        <Routes>
-          <Route path="/" element={<ShoeCard />} />
-          <Route path="/order" element={<OrderForm />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+    <OrderProvider>
+    <div className="min-h-screen w-full p-8 flex justify-center">
+      <div className="w-full max-w-7xl grid grid-cols-2 gap-10">
+        <div>
+          <ShoeCard/>
+        </div>
+        <div className="flex justify-center items-center pl-100">
+          <OrderForm/>
+          
+        </div>
+        <ToastContainer />
       </div>
-    </BrowserRouter>
+    </div>
+    </OrderProvider>
   )
 }
 
