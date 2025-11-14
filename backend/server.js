@@ -143,7 +143,7 @@ app.post("/order", async (req, res) => {
 
     await brevoEmail.sendTransacEmail({
   sender: {
-    email: "szironybalazs@gmail.com",
+    email: "berron@alfamarketinggroup.hu",
     name: "Shoe Customizer"
   },
   to: [
@@ -152,8 +152,8 @@ app.post("/order", async (req, res) => {
   subject: "Új cipő rendelés",
   htmlContent: `
     <h2>Új rendelés érkezett</h2>
-    <p><b>Név:</b> ${lastName} ${surname}</p>
-    <p><b>Email:</b> ${email}</p>
+    <p><b>Teljes név:</b> ${lastName} ${surname}</p>
+    <p><b>Email cím:</b> ${email}</p>
     <p><b>Telefonszám:</b> ${tel}</p>
     <p><b>Méret:</b> ${size}</p>
 
