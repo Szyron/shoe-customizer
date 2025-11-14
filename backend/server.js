@@ -143,11 +143,11 @@ app.post("/order", async (req, res) => {
 
     await brevoEmail.sendTransacEmail({
   sender: {
-    email: "berron@alfamarketinggroup.hu",
+    email: "szironybalazs@gmail.com",
     name: "Shoe Customizer"
   },
   to: [
-    { email: "szirony.dev@gmail.com" }
+    { email: "berron@alfamarketinggroup.hu" }
   ],
   subject: "Új cipő rendelés",
   htmlContent: `
