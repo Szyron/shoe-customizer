@@ -3,9 +3,10 @@ import React from 'react'
 function ShoeView({colors}) {
   return (
       <svg
-        height="600px"
-        width="600px"
+        height="100%"
+        width="100%"
         viewBox="-51.2 -51.2 614.40 614.40"
+        preserveAspectRatio="xMidYMid meet"
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         xmlSpace="preserve"

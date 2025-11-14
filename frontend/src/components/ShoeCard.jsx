@@ -30,40 +30,40 @@ function ShoeCard() {
 
 
     return (
-        <div className="card w-200 h-200">
+        <div className="card w-full max-w-sm md:max-w-md lg:max-w-2xl">
 
             <div className="card-body items-center text-center">
-                <h1 className="card-title text-3xl text-success">Shoe Customization</h1>
-                <p>Choose us about your dream shoe</p>
+                <h1 className="card-title text-2xl md:text-3xl text-success">Shoe Customization</h1>
+                <p className="text-sm md:text-base">Choose your dream shoe</p>
             </div>
             <div>
                 <StepsCard selectedPart={selectedPart} steps={steps} />
             </div>
-            <div className="flex items-center justify-center border-2 border-gray-300 rounded-lg relative bg-base-300" >
-                <figure className="w-100 h-100  hover-3d">
+            <div className="flex items-center justify-center border-2 border-gray-300 rounded-lg relative bg-base-300 p-4 md:p-6" >
+                <figure className="w-40 h-40 md:w-60 md:h-60 lg:w-80 lg:h-80 hover-3d">
                     <ShoeView colors={colors} />
                 </figure>
-                <div className="absolute bottom-4 right-4 w-32 h-32 bg-white rounded-lg shadow-lg border border-gray-300 flex items-center justify-center">
-                    <figure className="w-24 h-24 bg-base-300 rounded-lg shadow-lg border border-gray-300 flex items-center justify-center">
+                <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4 w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 bg-white rounded-lg shadow-lg border border-gray-300 flex items-center justify-center">
+                    <figure className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 bg-base-300 rounded-lg shadow-lg border border-gray-300 flex items-center justify-center">
                         <ShoeView small colors={colors} />
                     </figure>
                 </div>
-                <div className="absolute top-4 left-4">
-                    <button className="btn btn-accent text-white" onClick={() => setColors(defaultColors)}>Reset</button>
+                <div className="absolute top-3 left-3 md:top-4 md:left-4">
+                    <button className="btn btn-sm md:btn-md btn-accent text-white" onClick={() => setColors(defaultColors)}>Reset</button>
                 </div>
             </div>
-            <div className="flex w-full justify-center gap-12 mt-4">
-                <button className="btn" onClick={prevStep}>«</button>
-                <p className="text-xl font-semibold mx-auto">{steps[selectedPart]}</p>
-                <button className="btn" onClick={nextStep}>»</button>
+            <div className="flex w-full justify-center gap-4 md:gap-8 lg:gap-12 mt-4">
+                <button className="btn btn-sm md:btn-md" onClick={prevStep}>«</button>
+                <p className="text-lg md:text-xl font-semibold mx-auto">{steps[selectedPart]}</p>
+                <button className="btn btn-sm md:btn-md" onClick={nextStep}>»</button>
             </div>
             <div className="card-body">
-                <h2 className="card-title">{steps[selectedPart]} properties</h2>
-                <div className="avatar placeholder gap-2 mt-4">
+                <h2 className="card-title text-lg md:text-xl">{steps[selectedPart]} properties</h2>
+                <div className="avatar placeholder gap-2 mt-4 flex flex-wrap">
                     {data[currentPartKey]?.map((color) => (
                         <div
                             key={color.value}
-                            className={`w-12 h-12 rounded-full cursor-pointer border transition hover:scale-110
+                            className={`w-10 h-10 md:w-12 md:h-12 rounded-full cursor-pointer border transition hover:scale-110
                             ${colors[currentPartKey] === color.value
                                     ? "ring-4 ring-green-500 animate-bounce"
                                     : ""}`}

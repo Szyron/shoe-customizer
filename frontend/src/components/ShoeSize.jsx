@@ -7,12 +7,12 @@ function ShoeSize() {
 
 
     return (
-        <div className="flex flex-wrap gap-2 mt-4">
+        <div className="flex flex-wrap gap-2 mt-4 justify-center">
             {dataSize.sizes.map((size) => (
                 <button
                     key={size}
                     onClick={() => handleSelect(size)}
-                    className={`btn m-1 ${selectedSize === size
+                    className={`btn btn-sm md:btn-md ${selectedSize === size
                             ? "btn-success text-white"
                             : "btn-outline"
                         }`}
